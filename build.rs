@@ -85,6 +85,7 @@ fn main() -> std::io::Result<()> {
 		enum_map.insert(String::from("REQ_"), Enum::new(String::from("Request"), IntKind::I32));
 		enum_map.insert(String::from("ICON_"), Enum::new(String::from("Icon"), IntKind::I32));
 		enum_map.insert(String::from("DEF_"), Enum::new(String::from("Button"), IntKind::I32));
+		enum_map.insert(String::from("DITHER_"), Enum::new(String::from("Dither"), IntKind::I32));
 	}
 
 	// The bindgen::Builder is the main entry point
@@ -95,7 +96,8 @@ fn main() -> std::io::Result<()> {
 		// bindings for.
 		.header_contents(
 			"inkview.h",
-			"#include <inkview.h>"
+			"#include <inkview.h>
+			void DrawCircleLine(int x1, int y1, int x2, int y2, int width, int color);"
 		)
 		.whitelist_var("[A-Z]+DIR[0-9]?")
 		.whitelist_var("[A-Z]+DATA[0-9]?")
@@ -172,7 +174,7 @@ fn main() -> std::io::Result<()> {
 		.whitelist_var("ROTATE[0-9]+")
 		.whitelist_var("[XY]MIRROR")
 		.whitelist_var("A2DITHER")
-		.whitelist_var("DITHER_[A-Z]+")
+		//.whitelist_var("DITHER_[A-Z]+")
 		.whitelist_var("QN_[A-Z]+")
 		.whitelist_type("PB_(TTS_)?STATE")
 		.whitelist_var("MP_[A-Z]+")
@@ -243,6 +245,7 @@ fn main() -> std::io::Result<()> {
 		.whitelist_function("Invert[A-Z][A-Za-z]*")
 		.whitelist_function("ColorMap[A-Z][A-Za-z]*")
 		.whitelist_function("Dim[A-Z][A-Za-z]*")
+		.whitelist_function("DitherArea((Quick|Pattern)2Level)?")
 		.whitelist_function("QuickFloyd16Dither")
 		.whitelist_function("Stretch[A-Z][A-Za-z]*")
 		.whitelist_function("[SG]etCanvas")

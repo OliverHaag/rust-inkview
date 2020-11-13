@@ -3,21 +3,21 @@ Rust-bindings for the PocketBook InkView library
 ## Setup
 Clone <https://github.com/pocketbook/SDK_6.3.0/tree/5.19> and set it up as described.
 
-Set target and library directory via .cargo/config, replacing `$SDK_DIR` accordingly:
+Set target and library directory via .cargo/config, replacing `$SDK_ROOT_DIR` accordingly:
 ```
 [build]
 target = "arm-unknown-linux-gnueabi"
 
 [target.arm-unknown-linux-gnueabi]
-linker = "$SDK_DIR/SDK-B288/usr/bin/arm-obreey-linux-gnueabi-clang"
+linker = "$SDK_ROOT_DIR/SDK-B288/usr/bin/arm-obreey-linux-gnueabi-clang"
 rustflags = [
 	"-C", "target-cpu=cortex-a7",
-	"-L", "$SDK_DIR/SDK-B288/usr/arm-obreey-linux-gnueabi/sysroot/usr/local/lib/"
+	"-L", "$SDK_ROOT_DIR/SDK-B288/usr/arm-obreey-linux-gnueabi/sysroot/usr/local/lib/"
 ]
 ```
-Set environment variables for bindgen, replacing `$SDK_DIR` accordingly:
+Set environment variables for bindgen, replacing `$SDK_ROOT_DIR` accordingly:
 ```
-$ export BINDGEN_EXTRA_CLANG_ARGS="--sysroot=$SDK_DIR/SDK-B288/usr/arm-obreey-linux-gnueabi/sysroot/ -I$SDK_DIR/SDK-B288/usr/arm-obreey-linux-gnueabi/sysroot/usr/include/freetype2"
+$ export BINDGEN_EXTRA_CLANG_ARGS="--sysroot=$SDK_ROOT_DIR/SDK-B288/usr/arm-obreey-linux-gnueabi/sysroot/ -I$SDK_ROOT_DIR/SDK-B288/usr/arm-obreey-linux-gnueabi/sysroot/usr/include/freetype2"
 ```
 ## Building
 For build with debugging info:
